@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion | E-Daara</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Connexion à E-Daara</h2>
+
+        {% if form.errors %}
+            <p style="color: red; background: #ffdada; padding: 10px; border-radius: 5px;">
+                Identifiants incorrects. Veuillez réessayer.
+            </p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %} <div class="form-group">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Se connecter</button>
+        </form>
+        
+        <p style="margin-top: 20px;">
+            Pas encore de compte ? <a href="{% url 'register' %}">S'inscrire ici</a>
+        </p>
+    </div>
+</body>
+</html>

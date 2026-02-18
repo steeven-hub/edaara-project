@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription réussie | E-Daara</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container" style="text-align: center; margin-top: 50px;">
+        <h2 style="color: green;">Félicitations !</h2>
+        <p>Vous êtes maintenant inscrit au cours : <strong>{{ course.title }}</strong></p>
+        
+        <div style="margin-top: 30px;">
+            <a href="{% url 'home' %}" class="btn btn-primary">Retour à l'accueil</a>
+        </div>
+    </div>
+</body>
+</html>

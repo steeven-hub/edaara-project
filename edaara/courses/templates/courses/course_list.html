@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des cours</title>
+</head>
+<body>
+    <h1>Liste des cours</h1>
+    <ul>
+        {% for course in courses %}
+            <li>{{ course.title }} - {{ course.duration }} heures</li>
+        {% empty %}
+            <li>Aucun cours disponible</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Accueil</a>
+    <a href="{% url 'enroll_course' course.id %}">S'inscrire</a>
+</body>
+</html>

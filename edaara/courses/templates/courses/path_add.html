@@ -1,0 +1,29 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Ajouter un parcours{% endblock %}
+
+{% block content %}
+<h2>Ajouter un parcours</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Titre</label>
+        <input type="text" name="title" id="title" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="description" id="description" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="courses" class="form-label">Sélectionner les cours</label>
+        <select name="courses" id="courses" class="form-select" multiple required>
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.title }}</option>
+            {% endfor %}
+        </select>
+        <small class="form-text text-muted">Maintenez Ctrl (ou Cmd sur Mac) pour sélectionner plusieurs cours.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>
+{% endblock %}

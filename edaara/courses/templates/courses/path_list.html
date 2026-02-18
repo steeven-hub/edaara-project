@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des parcours</title>
+</head>
+<body>
+    <h1>Liste des parcours</h1>
+
+    <ul>
+        {% for path in paths %}
+            <li>{{ path.title }} - {{ path.courses.count }} cours</li>
+        {% empty %}
+            <li>Aucun parcours disponible</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">Retour Accueil</a>
+</body>
+</html>

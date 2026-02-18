@@ -1,0 +1,44 @@
+{% load static %} <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejoindre E-Daara</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div class="container"> <h2>Rejoindre E-Daara</h2>
+
+        {% if form.errors %}
+            <div style="color: red; background: #fee; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                <strong>Erreur dans le formulaire :</strong>
+                {{ form.errors }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div style="margin-bottom: 15px;">
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <br><small style="color: grey;">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <br><span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+        
+        <p style="margin-top: 20px;">
+            Déjà inscrit ? <a href="{% url 'login' %}">Connectez-vous ici</a>
+        </p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Daara | Accueil</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .btn-pdf { background-color: #f44336; color: white; } /* Rouge pour le PDF */
+        .badge-inscrit { color: #4caf50; font-weight: bold; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><strong>E-Daara</strong></div>
+        <div>
+            {% if user.is_authenticated %}
+                <span>Bienvenue, <strong>{{ user.username }}</strong> ({{ user.get_role_display }})</span>
+                <a href="{% url 'logout' %}" style="color: white; margin-left: 15px;">Déconnexion</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Tableau de Bord</h1>
+
+        {% if is_enseignant %}
+            <div class="card" style="border-left: 5px solid #2196f3; background-color: #e3f2fd;">
+                <h3>Actions Enseignant</h3>
+                <a href="{% url 'course_add' %}" class="btn btn-primary">+ Créer un cours</a>
+            </div>
+        {% endif %}
+
+        <h2 style="margin-top: 30px;">Catalogue des formations</h2>
+        <div class="course-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            {% for course in courses %}
+                <div class="card" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description|truncatewords:15 }}</p>
+                    
+                    {% if is_apprenant %}
+                        {% if course.id in mes_cours_ids %}
+                            <span class="badge-inscrit">✓ Inscrit</span>
+                            {% if course.pdf_resource %}
+                                <a href="{{ course.pdf_resource.url }}" target="_blank" class="btn btn-pdf" style="display:block; margin-top:10px; text-align:center; text-decoration:none; padding:8px; border-radius:4px;">
+                                    📄 Ouvrir le PDF
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'enroll_course' course.id %}" class="btn btn-success" style="display:block; text-align:center; text-decoration:none; background:#4caf50; color:white; padding:8px; border-radius:4px;">S'inscrire</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

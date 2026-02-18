@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Mon Espace d'Apprentissage</h1>
+<hr>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    {% for course in courses %}
+    <div style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; width: 300px;">
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.description|truncatewords:15 }}</p>
+        
+        {% if course.pdf_resource %}
+            <a href="{{ course.pdf_resource.url }}" 
+               target="_blank" 
+               style="display: inline-block; background: #28a745; color: white; padding: 10px; text-decoration: none; border-radius: 5px;">
+               📂 Ouvrir le cours (PDF)
+            </a>
+        {% else %}
+            <p style="color: #666; font-style: italic;">Pas de support PDF disponible.</p>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>Vous n'êtes inscrit à aucun cours pour le moment. <a href="{% url 'course_list' %}">Voir le catalogue</a>.</p>
+    {% endfor %}
+</div>
+{% endblock %}

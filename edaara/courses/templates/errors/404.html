@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="text-align: center; padding: 100px 20px;">
+    <h1 style="font-size: 80px; color: #3498db; margin-bottom: 0;">404</h1>
+    <h2 style="color: #2c3e50;">Oups ! Cette page n'existe pas.</h2>
+    <p style="color: #7f8c8d; margin-bottom: 30px;">Il semble que vous vous soyez égaré dans les couloirs de l'école.</p>
+    <a href="{% url 'home' %}" style="background: #3498db; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold;">
+        Retourner à l'accueil
+    </a>
+</div>
+{% endblock %}
