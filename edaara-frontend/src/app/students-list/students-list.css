@@ -1,0 +1,12 @@
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress {
+    background-color: #e9ecef;
+}
+
+.badge {
+    font-weight: 500;
+}
